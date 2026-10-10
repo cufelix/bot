@@ -1,0 +1,134 @@
+{
+ "L_hip_yaw": {
+  "design": [
+   -30,
+   20
+  ],
+  "free": [
+   -30,
+   20
+  ],
+  "hit_hi": null,
+  "hit_lo": null
+ },
+ "L_hip_roll": {
+  "design": [
+   -5,
+   25
+  ],
+  "free": [
+   -5,
+   25
+  ],
+  "hit_hi": null,
+  "hit_lo": null
+ },
+ "L_hip_pitch": {
+  "design": [
+   -90,
+   40
+  ],
+  "free": [
+   -90,
+   40
+  ],
+  "hit_hi": null,
+  "hit_lo": null
+ },
+ "L_knee": {
+  "design": [
+   0,
+   130
+  ],
+  "free": [
+   0,
+   130
+  ],
+  "hit_hi": null,
+  "hit_lo": null
+ },
+ "L_ankle_pitch": {
+  "design": [
+   -50,
+   50
+  ],
+  "free": [
+   -50,
+   50
+  ],
+  "hit_hi": null,
+  "hit_lo": null
+ },
+ "L_ankle_roll": {
+  "design": [
+   -20,
+   20
+  ],
+  "free": [
+   -20,
+   20
+  ],
+  "hit_hi": null,
+  "hit_lo": null
+ },
+ "L_sh_pitch": {
+  "design": [
+   -170,
+   90
+  ],
+  "free": [
+   -170,
+   90
+  ],
+  "hit_hi": null,
+  "hit_lo": null
+ },
+ "L_sh_roll": {
+  "design": [
+   -5,
+   100
+  ],
+  "free": [
+   -5,
+   100
+  ],
+  "hit_hi": null,
+  "hit_lo": null
+ },
+ "L_elbow": {
+  "design": [
+   -130,
+   5
+  ],
+  "free": [
+   -130,
+   5
+  ],
+  "hit_hi": null,
+  "hit_lo": null
+ },
+ "neck_yaw": {
+  "design": [
+   -80,
+   80
+  ],
+  "free": [
+   -80,
+   80
+  ],
+  "hit_hi": null,
+  "hit_lo": null
+ },
+ "neck_pitch": {
+  "design": [
+   -15,
+   15
+  ],
+  "free": [
+   -15,
+   15
+  ],
+  "hit_hi": null,
+  "hit_lo": null
+ }
+}
