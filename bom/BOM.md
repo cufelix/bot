@@ -9,17 +9,17 @@ Prices are retail estimates (Oct 2026), USD, shipping/tax/contingency are explic
 | A1 | Feetech STS3250 servo | 12V 50kg.cm stall (4.9 N.m) 1/345 magnetic encoder TTL bus dual-shaft | 8 | 75.00 | 600.00 | hip roll x2 + hip pitch x2 + knee x2 + ankle pitch x2. Order the 12V C001/C002 variant; price swings $60-97 |
 | A2 | Feetech STS3215 servo (ST-3215-C018) | 12V 30kg.cm stall (2.9 N.m) 1/345 magnetic encoder TTL bus dual-shaft 55 g | 13 | 35.00 | 455.00 | 12 joints + 1 spare. Must be the 12V C018 version not 6V |
 
-## Compute  ($224.50)
+## Compute  ($266.50)
 
 | Ref | Item | Spec | Qty | Unit $ | Line $ | Notes |
 |---|---|---|--:|--:|--:|---|
-| B1 | Raspberry Pi 5 4GB | quad A76 2.4GHz | 1 | 70.00 | 70.00 | runs control loop + vision. 8GB not needed |
+| B1 | Raspberry Pi 5 4GB | quad A76 2.4GHz | 1 | 110.00 | 110.00 | runs control loop + vision. 2GB (~$80) also works if the price is still elevated (2026 RAM-shortage pricing: $60 -> $110) |
 | B2 | Raspberry Pi 5 active cooler | heatsink + fan | 1 | 5.00 | 5.00 |  |
 | B3 | microSD card 64GB A2 | UHS-I | 1 | 10.00 | 10.00 |  |
 | B4 | USB camera module 1080p wide-angle | UVC board 32x32 mm with 28 mm mounting-hole square; lens FOV 90-120deg | 1 | 30.00 | 30.00 | lens fits the 20 mm head window; M2 self-tap posts in head; USB2 |
 | B5 | USB mini microphone | UVC audio class | 1 | 8.00 | 8.00 | optional voice input |
 | B6 | Waveshare Bus Servo Adapter (A) | USB-C to half-duplex TTL for Feetech STS | 2 | 10.00 | 20.00 | bus A legs (12 servos) bus B arms+neck (8 servos) |
-| B7 | BNO085 9-DoF IMU breakout | I2C fused orientation | 1 | 25.00 | 25.00 | on torso floor near CoM |
+| B7 | BNO085 9-DoF IMU breakout | I2C fused orientation | 1 | 27.00 | 27.00 | on torso floor near CoM |
 | B8 | ADS1115 16-bit ADC breakout | 4ch I2C | 2 | 8.00 | 16.00 | addresses 0x48 and 0x49 for 8 foot sensors |
 | B9 | FSR 402 force sensor (12.7 mm) | round | 8 | 5.00 | 40.00 | 4 per foot under TPU sole |
 | B10 | Resistor 10k 1/4W | voltage divider for FSR | 10 | 0.05 | 0.50 |  |
@@ -72,12 +72,12 @@ Prices are retail estimates (Oct 2026), USD, shipping/tax/contingency are explic
 | F7 | Velcro strap 20 mm 300 mm | battery retention | 2 | 2.00 | 4.00 |  |
 | F8 | Double-sided foam tape + felt pads | board mounting | 1 | 5.00 | 5.00 |  |
 
-## Contingency  ($280.00)
+## Contingency  ($240.00)
 
 | Ref | Item | Spec | Qty | Unit $ | Line $ | Notes |
 |---|---|---|--:|--:|--:|---|
 | G1 | Shipping / duties / tax allowance | ~8% of parts | 1 | 130.00 | 130.00 | orders from 6-9 vendors |
 | G2 | Reprint + breakage reserve | filament + screws + 1 spare cable set | 1 | 60.00 | 60.00 |  |
-| H1 | Price-drift reserve (memory/servo price spikes) | ~5% | 1 | 90.00 | 90.00 |  |
+| H1 | Price-drift reserve | servo prices seen $26-49 (3215) and $63-97 (3250) | 1 | 50.00 | 50.00 |  |
 
-## TOTAL: $1,941.50  (budget $2,000, margin $58.50)
+## TOTAL: $1,943.50  (budget $2,000, margin $56.50)

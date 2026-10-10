@@ -1,13 +1,13 @@
 ref,group,item,spec,qty,unit_usd,typical_source,notes
 A1,Actuation,Feetech STS3250 servo,12V 50kg.cm stall (4.9 N.m) 1/345 magnetic encoder TTL bus dual-shaft,8,75.00,Feetech store / OpenELAB / AIFITLAB,hip roll x2 + hip pitch x2 + knee x2 + ankle pitch x2. Order the 12V C001/C002 variant; price swings $60-97
 A2,Actuation,Feetech STS3215 servo (ST-3215-C018),12V 30kg.cm stall (2.9 N.m) 1/345 magnetic encoder TTL bus dual-shaft 55 g,13,35.00,Feetech store / RobotShop / AIFITLAB,12 joints + 1 spare. Must be the 12V C018 version not 6V
-B1,Compute,Raspberry Pi 5 4GB,quad A76 2.4GHz,1,70.00,Pi reseller,runs control loop + vision. 8GB not needed
+B1,Compute,Raspberry Pi 5 4GB,quad A76 2.4GHz,1,110.00,Pi reseller,runs control loop + vision. 2GB (~$80) also works if the price is still elevated (2026 RAM-shortage pricing: $60 -> $110)
 B2,Compute,Raspberry Pi 5 active cooler,heatsink + fan,1,5.00,Pi reseller,
 B3,Compute,microSD card 64GB A2,UHS-I,1,10.00,any,
 B4,Compute,USB camera module 1080p wide-angle,UVC board 32x32 mm with 28 mm mounting-hole square; lens FOV 90-120deg,1,30.00,Arducam/ELP,lens fits the 20 mm head window; M2 self-tap posts in head; USB2
 B5,Compute,USB mini microphone,UVC audio class,1,8.00,any,optional voice input
 B6,Compute,Waveshare Bus Servo Adapter (A),USB-C to half-duplex TTL for Feetech STS,2,10.00,Waveshare,bus A legs (12 servos) bus B arms+neck (8 servos)
-B7,Compute,BNO085 9-DoF IMU breakout,I2C fused orientation,1,25.00,Adafruit/SparkFun,on torso floor near CoM
+B7,Compute,BNO085 9-DoF IMU breakout,I2C fused orientation,1,27.00,Adafruit/SparkFun,on torso floor near CoM
 B8,Compute,ADS1115 16-bit ADC breakout,4ch I2C,2,8.00,Adafruit/clone,addresses 0x48 and 0x49 for 8 foot sensors
 B9,Compute,FSR 402 force sensor (12.7 mm),round,8,5.00,Interlink/clone,4 per foot under TPU sole
 B10,Compute,Resistor 10k 1/4W,voltage divider for FSR,10,0.05,any,
@@ -41,4 +41,4 @@ F7,Hardware,Velcro strap 20 mm 300 mm,battery retention,2,2.00,any,
 F8,Hardware,Double-sided foam tape + felt pads,board mounting,1,5.00,any,
 G1,Contingency,Shipping / duties / tax allowance,~8% of parts,1,130.00,,orders from 6-9 vendors
 G2,Contingency,Reprint + breakage reserve,filament + screws + 1 spare cable set,1,60.00,,
-H1,Contingency,Price-drift reserve (memory/servo price spikes),~5%,1,90.00,,
+H1,Contingency,Price-drift reserve,servo prices seen $26-49 (3215) and $63-97 (3250),1,50.00,,

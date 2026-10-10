@@ -12,7 +12,7 @@ A complete, parametric design: CAD (CadQuery → STEP/STL/GLB), bill of material
 | Brain | Raspberry Pi 5 + BNO085 IMU + 8 foot force sensors + USB camera |
 | Power | 3S LiPo 3000 mAh, ~40 min walking (estimate), 20 A fuse, hard kill switch |
 | Structure | 27 FDM parts, 559 g of PETG-CF/PETG/TPU, every part fits a 220 mm bed |
-| **BOM** | **$1,941** incl. spare servo, shipping/tax allowance and reserves ([BOM](bom/BOM.md)) — $59 under budget |
+| **BOM** | **$1,943** incl. spare servo, shipping/tax allowance and reserves ([BOM](bom/BOM.md)) — $57 under budget |
 | Verified in software | no CAD clashes in 11 joint-sweeps + 8 combined poses, torque margins, stands and walks in MuJoCo |
 
 **Interactive 3D viewer** (poses + joint sliders): `python3 -m http.server` in the repo root, open `http://localhost:8000/docs/viewer/`.
