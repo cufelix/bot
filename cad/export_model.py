@@ -12,10 +12,10 @@ def main(out="../out/model.json"):
         parts=[],
     )
     for n, p in parts.items():
-        c = p.shape.Center()
+        c = p.shape.Center(); bb = p.shape.BoundingBox()
         model["parts"].append(dict(name=n, kind=p.kind, frame=p.frame, material=p.material, mass=round(Rb.mass_of(p), 2),
-                                   com=[round(c.x, 2), round(c.y, 2), round(c.z, 2)], volume=round(p.shape.Volume(), 1)))
-    model["parts"].append(dict(name="misc_wiring_fasteners", kind="misc", frame="base", material="", mass=MISC_G, com=[0, 0, 440.0], volume=0))
+                                   com=[round(c.x, 2), round(c.y, 2), round(c.z, 2)], volume=round(p.shape.Volume(), 1), bbox=[round(bb.xlen, 1), round(bb.ylen, 1), round(bb.zlen, 1)]))
+    model["parts"].append(dict(name="misc_wiring_fasteners", kind="misc", frame="base", material="", mass=MISC_G, com=[0, 0, 440.0], volume=0, bbox=[60, 90, 60]))
     model["feet"] = dict(x0=P.FOOT_X0, x1=P.FOOT_X0 + P.FOOT_L, half_w=P.FOOT_W / 2)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     json.dump(model, open(out, "w"), indent=1)

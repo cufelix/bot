@@ -1,0 +1,11 @@
+cadquery>=2.4
+numpy
+scipy
+trimesh
+networkx
+rtree
+matplotlib
+mujoco
+imageio
+pyserial
+pytest

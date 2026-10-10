@@ -1,0 +1,282 @@
+{
+ "L_hip_yaw": {
+  "id": 1,
+  "bus": "A",
+  "servo": "STS3215",
+  "axis": "Z",
+  "sign": -1,
+  "lo": -30,
+  "hi": 20,
+  "pos_mm": [
+   0,
+   52.0,
+   362.0
+  ]
+ },
+ "L_hip_roll": {
+  "id": 2,
+  "bus": "A",
+  "servo": "STS3250",
+  "axis": "X",
+  "sign": 1,
+  "lo": -15,
+  "hi": 25,
+  "pos_mm": [
+   -30.0,
+   52.0,
+   328.0
+  ]
+ },
+ "L_hip_pitch": {
+  "id": 3,
+  "bus": "A",
+  "servo": "STS3250",
+  "axis": "Y",
+  "sign": 1,
+  "lo": -90,
+  "hi": 40,
+  "pos_mm": [
+   0,
+   52.0,
+   294.0
+  ]
+ },
+ "L_knee": {
+  "id": 4,
+  "bus": "A",
+  "servo": "STS3250",
+  "axis": "Y",
+  "sign": 1,
+  "lo": 0,
+  "hi": 130,
+  "pos_mm": [
+   0,
+   51.0,
+   184.0
+  ]
+ },
+ "L_ankle_pitch": {
+  "id": 5,
+  "bus": "A",
+  "servo": "STS3250",
+  "axis": "Y",
+  "sign": 1,
+  "lo": -50,
+  "hi": 50,
+  "pos_mm": [
+   0,
+   51.0,
+   74.0
+  ]
+ },
+ "L_ankle_roll": {
+  "id": 6,
+  "bus": "A",
+  "servo": "STS3215",
+  "axis": "X",
+  "sign": 1,
+  "lo": -20,
+  "hi": 20,
+  "pos_mm": [
+   -24.0,
+   52.0,
+   40.0
+  ]
+ },
+ "R_hip_yaw": {
+  "id": 7,
+  "bus": "A",
+  "servo": "STS3215",
+  "axis": "Z",
+  "sign": -1,
+  "lo": -20,
+  "hi": 30,
+  "pos_mm": [
+   0,
+   -52.0,
+   362.0
+  ]
+ },
+ "R_hip_roll": {
+  "id": 8,
+  "bus": "A",
+  "servo": "STS3250",
+  "axis": "X",
+  "sign": 1,
+  "lo": -25,
+  "hi": 15,
+  "pos_mm": [
+   -30.0,
+   -52.0,
+   328.0
+  ]
+ },
+ "R_hip_pitch": {
+  "id": 9,
+  "bus": "A",
+  "servo": "STS3250",
+  "axis": "Y",
+  "sign": -1,
+  "lo": -40,
+  "hi": 90,
+  "pos_mm": [
+   0,
+   -52.0,
+   294.0
+  ]
+ },
+ "R_knee": {
+  "id": 10,
+  "bus": "A",
+  "servo": "STS3250",
+  "axis": "Y",
+  "sign": -1,
+  "lo": -130,
+  "hi": 0,
+  "pos_mm": [
+   0,
+   -51.0,
+   184.0
+  ]
+ },
+ "R_ankle_pitch": {
+  "id": 11,
+  "bus": "A",
+  "servo": "STS3250",
+  "axis": "Y",
+  "sign": -1,
+  "lo": -50,
+  "hi": 50,
+  "pos_mm": [
+   0,
+   -51.0,
+   74.0
+  ]
+ },
+ "R_ankle_roll": {
+  "id": 12,
+  "bus": "A",
+  "servo": "STS3215",
+  "axis": "X",
+  "sign": 1,
+  "lo": -20,
+  "hi": 20,
+  "pos_mm": [
+   -24.0,
+   -52.0,
+   40.0
+  ]
+ },
+ "L_sh_pitch": {
+  "id": 13,
+  "bus": "B",
+  "servo": "STS3215",
+  "axis": "Y",
+  "sign": 1,
+  "lo": -170,
+  "hi": 90,
+  "pos_mm": [
+   0,
+   62.0,
+   477.7
+  ]
+ },
+ "L_sh_roll": {
+  "id": 14,
+  "bus": "B",
+  "servo": "STS3215",
+  "axis": "X",
+  "sign": 1,
+  "lo": -5,
+  "hi": 100,
+  "pos_mm": [
+   -18.0,
+   104.0,
+   477.7
+  ]
+ },
+ "L_elbow": {
+  "id": 15,
+  "bus": "B",
+  "servo": "STS3215",
+  "axis": "Y",
+  "sign": 1,
+  "lo": -130,
+  "hi": 5,
+  "pos_mm": [
+   -11.0,
+   112.0,
+   392.7
+  ]
+ },
+ "R_sh_pitch": {
+  "id": 16,
+  "bus": "B",
+  "servo": "STS3215",
+  "axis": "Y",
+  "sign": -1,
+  "lo": -90,
+  "hi": 170,
+  "pos_mm": [
+   0,
+   -62.0,
+   477.7
+  ]
+ },
+ "R_sh_roll": {
+  "id": 17,
+  "bus": "B",
+  "servo": "STS3215",
+  "axis": "X",
+  "sign": 1,
+  "lo": -100,
+  "hi": 5,
+  "pos_mm": [
+   -18.0,
+   -104.0,
+   477.7
+  ]
+ },
+ "R_elbow": {
+  "id": 18,
+  "bus": "B",
+  "servo": "STS3215",
+  "axis": "Y",
+  "sign": -1,
+  "lo": -5,
+  "hi": 130,
+  "pos_mm": [
+   -11.0,
+   -112.0,
+   392.7
+  ]
+ },
+ "neck_yaw": {
+  "id": 19,
+  "bus": "B",
+  "servo": "STS3215",
+  "axis": "Z",
+  "sign": 1,
+  "lo": -80,
+  "hi": 80,
+  "pos_mm": [
+   0,
+   0,
+   509.7
+  ]
+ },
+ "neck_pitch": {
+  "id": 20,
+  "bus": "B",
+  "servo": "STS3215",
+  "axis": "Y",
+  "sign": 1,
+  "lo": -15,
+  "hi": 15,
+  "pos_mm": [
+   0,
+   12,
+   549.7
+  ]
+ }
+}

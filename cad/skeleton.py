@@ -26,10 +26,10 @@ LEG_ROUTES = {
 def left_leg():
     return [
         Joint("hip_yaw",   "STS3215", (0, HY, Zhy), neg(Z), X, "pelvis", -30, 20),
-        Joint("hip_roll",  "STS3250", (XR, HY, Zhr), X, neg(Z), "hip_yaw", -5, 25),
+        Joint("hip_roll",  "STS3250", (XR, HY, Zhr), X, neg(Z), "hip_yaw", -15, 25),
         Joint("hip_pitch", "STS3250", (0, HY, Zhp), Y, Z, "hip_roll", -90, 40),
         Joint("knee",      "STS3250", (0, HY - 1, Zk), Y, Z, "hip_pitch", 0, 130),
-        Joint("ankle_pitch","STS3215", (0, HY - 1, Zp), Y, Z, "knee", -50, 50),
+        Joint("ankle_pitch","STS3250", (0, HY - 1, Zp), Y, Z, "knee", -50, 50),
         Joint("ankle_roll","STS3215", (XAR, HY, Zr), X, neg(Y), "ankle_pitch", -20, 20),
     ]
 

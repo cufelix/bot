@@ -1,0 +1,44 @@
+ref,group,item,spec,qty,unit_usd,typical_source,notes
+A1,Actuation,Feetech STS3250 servo,12V 50kg.cm stall (4.9 N.m) 1/345 magnetic encoder TTL bus dual-shaft,8,75.00,Feetech store / OpenELAB / AIFITLAB,hip roll x2 + hip pitch x2 + knee x2 + ankle pitch x2. Order the 12V C001/C002 variant; price swings $60-97
+A2,Actuation,Feetech STS3215 servo (ST-3215-C018),12V 30kg.cm stall (2.9 N.m) 1/345 magnetic encoder TTL bus dual-shaft 55 g,13,35.00,Feetech store / RobotShop / AIFITLAB,12 joints + 1 spare. Must be the 12V C018 version not 6V
+B1,Compute,Raspberry Pi 5 4GB,quad A76 2.4GHz,1,70.00,Pi reseller,runs control loop + vision. 8GB not needed
+B2,Compute,Raspberry Pi 5 active cooler,heatsink + fan,1,5.00,Pi reseller,
+B3,Compute,microSD card 64GB A2,UHS-I,1,10.00,any,
+B4,Compute,USB camera module 1080p wide-angle,UVC board ~32x32mm lens FOV 90-120deg,1,30.00,Arducam/ELP,fits 22x13 mm head window; USB2
+B5,Compute,USB mini microphone,UVC audio class,1,8.00,any,optional voice input
+B6,Compute,Waveshare Bus Servo Adapter (A),USB-C to half-duplex TTL for Feetech STS,2,10.00,Waveshare,bus A legs (12 servos) bus B arms+neck (8 servos)
+B7,Compute,BNO085 9-DoF IMU breakout,I2C fused orientation,1,25.00,Adafruit/SparkFun,on torso floor near CoM
+B8,Compute,ADS1115 16-bit ADC breakout,4ch I2C,2,8.00,Adafruit/clone,addresses 0x48 and 0x49 for 8 foot sensors
+B9,Compute,FSR 402 force sensor (12.7 mm),round,8,5.00,Interlink/clone,4 per foot under TPU sole
+B10,Compute,Resistor 10k 1/4W,voltage divider for FSR,10,0.05,any,
+C1,Power,LiPo 3S 11.1V 3000mAh 50C XT60,~105x34x24 mm ~190 g,2,28.00,hobby RC shop,one in robot one charging
+C2,Power,LiPo balance charger 6A (iMAX B6 class),3S balance charge + storage mode,1,35.00,hobby RC shop,
+C3,Power,LiPo safe charging bag,fire retardant,1,8.00,hobby RC shop,
+C4,Power,Pololu D24V50F5 buck regulator,5V 5A,1,22.00,Pololu,Pi 5 supply via GPIO 5V pins. Set PSU_MAX_CURRENT=5000
+C5,Power,INA219 current/voltage sensor,I2C 26V 3.2A shunt,1,8.00,Adafruit/clone,replace shunt with 10 mOhm for 20A range (see docs)
+C6,Power,Inline blade fuse holder + 20A ATC fuse,14AWG,2,3.00,auto parts,main fuse + spare. Walking peaks ~10 A (see docs/power.md); a fall can stall several servos
+C7,Power,Latching kill switch 30A (XT60 inline),panel mount,1,9.00,RC/ebike shop,hard e-stop at the back
+C8,Power,XT60 connector pair,male+female,6,1.20,hobby RC shop,
+C9,Power,Terminal barrier strip 12pos 25A,5.08 mm pitch,2,4.00,electronics,star power distribution (V+ and GND)
+C10,Power,LiPo low-voltage alarm buzzer 1-8S,,1,4.00,hobby RC shop,connect to balance lead
+D1,Wiring,Servo extension cables 3-pin,assorted 100-300 mm matching Feetech connector,24,1.20,Feetech/AliExpress,verify connector family against servos before ordering
+D2,Wiring,Silicone wire 14AWG red/black 2 m each,main trunk,1,8.00,RC shop,
+D3,Wiring,Silicone wire 22AWG 5 colours 3 m each,limb power feeds + sensors,1,15.00,RC shop,
+D4,Wiring,Heat shrink + ferrules + crimp terminal assortment,,1,18.00,electronics,
+D5,Wiring,Spiral cable wrap + zip ties + Kapton tape,,1,10.00,any,
+D6,Wiring,USB-C cable 15 cm,right-angle preferred,2,4.00,any,adapter to Pi
+D7,Wiring,Dupont jumper wires + 2.54 mm headers,,1,6.00,any,
+E1,Print,PETG-CF filament 1kg,structural links + pelvis + torso,1,30.00,filament maker,~700 g used
+E2,Print,PETG filament 1kg,head + covers,1,18.00,filament maker,~150 g used
+E3,Print,TPU 95A filament 0.5kg,foot soles,1,14.00,filament maker,
+F1,Hardware,M3 socket cap screw assortment A2 (6-30 mm) ~600 pcs,,1,14.00,any,
+F2,Hardware,M3 brass heat-set inserts 4.6mm,200 pcs,1,9.00,any,
+F3,Hardware,M3 nylock nuts + washers,,1,8.00,any,
+F4,Hardware,M2.5 brass standoff + screw kit,Pi 5 + sensor boards,1,9.00,any,
+F5,Hardware,623ZZ bearing 3x10x4,neck pitch rear support,4,1.00,any,
+F6,Hardware,Threadlocker medium (blue) + silicone grease,,1,10.00,any,
+F7,Hardware,Velcro strap 20 mm 300 mm,battery retention,2,2.00,any,
+F8,Hardware,Double-sided foam tape + felt pads,board mounting,1,5.00,any,
+G1,Contingency,Shipping / duties / tax allowance,~8% of parts,1,130.00,,orders from 6-9 vendors
+G2,Contingency,Reprint + breakage reserve,filament + screws + 1 spare cable set,1,60.00,,
+H1,Contingency,Price-drift reserve (memory/servo price spikes),~5%,1,90.00,,
