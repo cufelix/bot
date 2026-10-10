@@ -49,3 +49,7 @@ if __name__ == "__main__":
               "L_sh_pitch": -40, "R_sh_pitch": 40, "L_elbow": -50, "R_elbow": 50}
     render(parts, J, crouch, [(8, 35)], "docs/img/robot_crouch.png", size=(6, 8))
     print("rendered")
+    # hero shots of the full robot
+    render(parts, J, {}, [(12, 35)], "docs/img/robot_hero_front.png", size=(7, 9))
+    render(parts, J, {}, [(12, 215)], "docs/img/robot_hero_back.png", size=(7, 9))
+    render(parts, J, {}, [(12, 125)], "docs/img/robot_hero_side.png", size=(7, 9))

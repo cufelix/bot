@@ -23,6 +23,7 @@ glb:
 	$(PY) cad/export_glb.py
 render:
 	$(PY) cad/render.py
+	$(PY) cad/render_parts.py
 docs:       ## data-driven docs (print guide, analysis, assembly table, harness)
 	$(PY) tools/gen_docs.py
 sim:
