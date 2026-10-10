@@ -13,13 +13,15 @@ class SafetyTrip(RuntimeError):
     pass
 
 class Robot:
-    def __init__(self, ports=None, dry_run=False, joints=None):
+    def __init__(self, ports=None, dry_run=False, joints=None, buses=None):
         self.joints = joints or load_joints()
         self.names = list(self.joints)
         self.buses = {}
         ids = {"A": [], "B": []}
         for n, j in self.joints.items(): ids[j["bus"]].append(j["id"])
-        if dry_run:
+        if buses is not None:
+            self.buses = {b: Servos(x) for b, x in buses.items()}      # injected (e.g. rl/simbus.py physics-backed bus)
+        elif dry_run:
             self.buses = {b: Servos(FakeBus(i)) for b, i in ids.items()}
         else:
             ports = ports or DEFAULT_PORTS

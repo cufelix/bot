@@ -48,17 +48,11 @@ def build():
     dx = (table(0.1, 0, 0, SWAY, LIFT) - stand - sw) / 0.1
     dy = (table(0, 0.06, 0, SWAY, LIFT) - stand - sw) / 0.06
     dz = (table(0, 0, 0.5, SWAY, LIFT) - stand - sw) / 0.5
-    np.savez(os.path.join(HERE, "gait_ref.npz"), stand=stand[0], sway=sw, dx=dx, dy=dy, dz=dz, period=T)
+    for out in (os.path.join(HERE, "gait_ref.npz"), os.path.join(HERE, "..", "firmware", "config", "gait_ref.npz")):
+        np.savez(out, stand=stand[0], sway=sw, dx=dx, dy=dy, dz=dz, period=T)
     return stand[0], sw, dx, dy, dz
 
-class Ref:
-    def __init__(self):
-        z = np.load(os.path.join(HERE, "gait_ref.npz")); self.stand, self.sway, self.dx, self.dy, self.dz = (z[k] for k in ("stand", "sway", "dx", "dy", "dz"))
-    def q(self, phase, cmd):
-        f = phase * N; i = int(f) % N; j = (i + 1) % N; w = f - int(f)
-        lerp = lambda a: a[i] * (1 - w) + a[j] * w
-        g = min(1.0, float(np.linalg.norm(cmd)) / 0.05) if True else 1.0
-        return self.stand + g * (lerp(self.sway) + cmd[0] * lerp(self.dx) + cmd[1] * lerp(self.dy) + cmd[2] * lerp(self.dz))
+from humanoid.gaitref import Ref      # noqa: E402  (runtime lookup shared with the robot firmware)
 
 if __name__ == "__main__":
     st, sw, dx, dy, dz = build()

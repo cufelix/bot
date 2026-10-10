@@ -7,6 +7,8 @@ import numpy as np, mujoco, gymnasium as gym
 from gymnasium import spaces
 from . import model as M
 from .gait_ref import Ref, T as GAIT_T
+import sys, os; sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'firmware'))
+from humanoid.obs import build_obs, OBS_DIM
 
 DT, DECIM = 0.002, 10                # 500 Hz physics, 50 Hz policy
 GAIT_PERIOD = GAIT_T                    # s
@@ -54,10 +56,7 @@ class WalkEnv(gym.Env):
         if self.randomize: q = q + self.rng.normal(0, 0.005, q.shape); qd = qd + self.rng.normal(0, 0.05, qd.shape)
         gyro = self.d.qvel[3:6] + (self.rng.normal(0, 0.02, 3) if self.randomize else 0)
         g = self._quat_rot_inv(np.array([0, 0, -1.0])) + (self.rng.normal(0, 0.01, 3) if self.randomize else 0)
-        ph = 2 * np.pi * self._phase()
-        o = np.concatenate([gyro * 0.25, g, self.cmd * np.array([2.0, 2.0, 0.5]), (q[self.leg_idx] - self.qref), qd[self.leg_idx] * 0.05,
-                            self.last_a, [np.sin(ph), np.cos(ph)]])
-        return o.astype(np.float32)
+        return build_obs(gyro, g, self.cmd, q[self.leg_idx], self.qref, qd[self.leg_idx], self.last_a, self._phase())
 
     # ---------- gym API
     def reset(self, seed=None, options=None):

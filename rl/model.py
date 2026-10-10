@@ -3,6 +3,8 @@ import json, os
 import numpy as np, mujoco
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+import sys; sys.path.insert(0, os.path.join(ROOT, "firmware"))
+from humanoid.poses import ARMS_SIM
 MODEL_JSON = os.path.join(ROOT, "out", "model.json")
 URDF = os.path.join(ROOT, "sim", "robot", "humanoid.urdf")
 VBAT_SCALE = 11.1 / 12.0                       # servo datasheet numbers are for 12 V
@@ -20,8 +22,9 @@ def default_pose(q=15.0):
     a = {}
     for s, sg in (("L_", 1), ("R_", -1)):
         a[s + "hip_pitch"] = -q * sg; a[s + "knee"] = 2 * q * sg; a[s + "ankle_pitch"] = -q * sg
-    a.update({"L_sh_pitch": -20.0, "R_sh_pitch": -20.0, "L_elbow": -40.0, "R_elbow": -40.0, "L_sh_roll": 8.0, "R_sh_roll": -8.0})
-    return {k: np.radians(v) for k, v in a.items()}
+    out = {k: np.radians(v) for k, v in a.items()}
+    out.update(ARMS_SIM)
+    return out
 
 def build(kp=40.0, kv=1.2, dt=0.002, scene=None):
     info = json.load(open(MODEL_JSON))["joints"]

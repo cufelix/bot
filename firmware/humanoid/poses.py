@@ -9,3 +9,7 @@ ARMS_READY = {"L_sh_pitch": -20.0, "R_sh_pitch": -20.0, "L_elbow": -40.0, "R_elb
 def wave(t):
     import math
     return {"R_sh_pitch": -160.0, "R_sh_roll": -30.0, "R_elbow": -60.0 + 25 * math.sin(2 * math.pi * 1.5 * t)}
+
+# Arm/neck hold pose in the simulator's joint convention (rad); the same values the policy was trained with.
+import math
+ARMS_SIM = {k: math.radians(v) for k, v in {"L_sh_pitch": -20.0, "R_sh_pitch": -20.0, "L_elbow": -40.0, "R_elbow": -40.0, "L_sh_roll": 8.0, "R_sh_roll": -8.0}.items()}
