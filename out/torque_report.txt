@@ -1,0 +1,33 @@
+mass 2.49 kg
+single_support_q0            feasible 41.9 {'hip_yaw': np.float64(0.0), 'hip_roll': np.float64(1.22), 'hip_pitch': np.float64(0.06), 'knee': np.float64(0.06), 'ankle_pitch': np.float64(0.06), 'ankle_roll': np.float64(0.0)}
+single_support_q10           feasible 43.3 {'hip_yaw': np.float64(0.0), 'hip_roll': np.float64(1.22), 'hip_pitch': np.float64(0.05), 'knee': np.float64(0.45), 'ankle_pitch': np.float64(0.03), 'ankle_roll': np.float64(0.0)}
+single_support_q20           feasible 44.5 {'hip_yaw': np.float64(0.0), 'hip_roll': np.float64(1.22), 'hip_pitch': np.float64(0.03), 'knee': np.float64(0.83), 'ankle_pitch': np.float64(0.0), 'ankle_roll': np.float64(0.0)}
+single_support_q10_cop30_0   feasible 43.3 {'hip_yaw': np.float64(0.0), 'hip_roll': np.float64(1.22), 'hip_pitch': np.float64(0.67), 'knee': np.float64(0.27), 'ankle_pitch': np.float64(0.69), 'ankle_roll': np.float64(0.0)}
+single_support_q10_cop-30_0  feasible 43.3 {'hip_yaw': np.float64(0.0), 'hip_roll': np.float64(1.22), 'hip_pitch': np.float64(0.76), 'knee': np.float64(1.17), 'ankle_pitch': np.float64(0.75), 'ankle_roll': np.float64(0.0)}
+single_support_q10_cop0_20   feasible 43.3 {'hip_yaw': np.float64(0.0), 'hip_roll': np.float64(0.74), 'hip_pitch': np.float64(0.05), 'knee': np.float64(0.45), 'ankle_pitch': np.float64(0.03), 'ankle_roll': np.float64(0.49)}
+single_support_q10_cop0_-20  feasible 43.3 {'hip_yaw': np.float64(0.0), 'hip_roll': np.float64(1.71), 'hip_pitch': np.float64(0.05), 'knee': np.float64(0.45), 'ankle_pitch': np.float64(0.03), 'ankle_roll': np.float64(0.49)}
+single_support_q20_cop30_0   feasible 44.5 {'hip_yaw': np.float64(0.0), 'hip_roll': np.float64(1.22), 'hip_pitch': np.float64(0.68), 'knee': np.float64(0.11), 'ankle_pitch': np.float64(0.72), 'ankle_roll': np.float64(0.0)}
+single_support_q20_cop-30_0  feasible 44.5 {'hip_yaw': np.float64(0.0), 'hip_roll': np.float64(1.22), 'hip_pitch': np.float64(0.75), 'knee': np.float64(1.55), 'ankle_pitch': np.float64(0.72), 'ankle_roll': np.float64(0.0)}
+single_support_q20_cop0_20   feasible 44.5 {'hip_yaw': np.float64(0.0), 'hip_roll': np.float64(0.74), 'hip_pitch': np.float64(0.03), 'knee': np.float64(0.83), 'ankle_pitch': np.float64(0.0), 'ankle_roll': np.float64(0.49)}
+single_support_q20_cop0_-20  feasible 44.5 {'hip_yaw': np.float64(0.0), 'hip_roll': np.float64(1.71), 'hip_pitch': np.float64(0.03), 'knee': np.float64(0.83), 'ankle_pitch': np.float64(0.0), 'ankle_roll': np.float64(0.49)}
+double_support_q15           feasible 42.3 {'hip_pitch': np.float64(0.05), 'knee': np.float64(0.32), 'ankle_pitch': np.float64(0.02)}
+double_support_q25           feasible 43.7 {'hip_pitch': np.float64(0.05), 'knee': np.float64(0.49), 'ankle_pitch': np.float64(0.0)}
+double_support_q40           feasible 45.4 {'hip_pitch': np.float64(0.05), 'knee': np.float64(0.71), 'ankle_pitch': np.float64(0.02)}
+double_support_q55           feasible 46.9 {'hip_pitch': np.float64(0.05), 'knee': np.float64(0.9), 'ankle_pitch': np.float64(0.04)}
+swing_leg_hip45_knee90       feasible  {'hip_pitch': np.float64(0.06), 'knee': np.float64(0.16), 'ankle_pitch': np.float64(0.01)}
+arm_forward_horizontal       feasible  {'sh_pitch': np.float64(0.44), 'sh_roll': np.float64(0.0), 'elbow': np.float64(0.21)}
+arm_sideways_horizontal      feasible  {'sh_pitch': np.float64(0.05), 'sh_roll': np.float64(0.44), 'elbow': np.float64(0.0)}
+arm_fwd_elbow90              feasible  {'sh_pitch': np.float64(0.23), 'sh_roll': np.float64(0.0), 'elbow': np.float64(0.0)}
+neck_pitch_-15               feasible  {'neck_pitch': np.float64(0.0)}
+neck_pitch_15                feasible  {'neck_pitch': np.float64(0.01)}
+
+{'joint': 'ankle_pitch', 'servo': 'STS3250', 'static_nm': np.float64(0.75), 'peak_nm': np.float64(1.34), 'stall_nm': 4.9, 'rated_nm': 1.6, 'peak_over_stall': np.float64(0.27), 'static_over_rated': np.float64(0.47), 'ok': True}
+{'joint': 'ankle_roll', 'servo': 'STS3215', 'static_nm': np.float64(0.49), 'peak_nm': np.float64(0.88), 'stall_nm': 2.9, 'rated_nm': 1.0, 'peak_over_stall': np.float64(0.3), 'static_over_rated': np.float64(0.49), 'ok': True}
+{'joint': 'elbow', 'servo': 'STS3215', 'static_nm': np.float64(0.21), 'peak_nm': np.float64(0.37), 'stall_nm': 2.9, 'rated_nm': 1.0, 'peak_over_stall': np.float64(0.13), 'static_over_rated': np.float64(0.21), 'ok': True}
+{'joint': 'hip_pitch', 'servo': 'STS3250', 'static_nm': np.float64(0.76), 'peak_nm': np.float64(1.37), 'stall_nm': 4.9, 'rated_nm': 1.6, 'peak_over_stall': np.float64(0.28), 'static_over_rated': np.float64(0.48), 'ok': True}
+{'joint': 'hip_roll', 'servo': 'STS3250', 'static_nm': np.float64(1.71), 'peak_nm': np.float64(3.08), 'stall_nm': 4.9, 'rated_nm': 1.6, 'peak_over_stall': np.float64(0.63), 'static_over_rated': np.float64(1.07), 'ok': True}
+{'joint': 'hip_yaw', 'servo': 'STS3215', 'static_nm': 0, 'peak_nm': 0.0, 'stall_nm': 2.9, 'rated_nm': 1.0, 'peak_over_stall': 0.0, 'static_over_rated': 0.0, 'ok': True}
+{'joint': 'knee', 'servo': 'STS3250', 'static_nm': np.float64(1.55), 'peak_nm': np.float64(2.79), 'stall_nm': 4.9, 'rated_nm': 1.6, 'peak_over_stall': np.float64(0.57), 'static_over_rated': np.float64(0.97), 'ok': True}
+{'joint': 'neck_pitch', 'servo': 'STS3215', 'static_nm': np.float64(0.01), 'peak_nm': np.float64(0.02), 'stall_nm': 2.9, 'rated_nm': 1.0, 'peak_over_stall': np.float64(0.01), 'static_over_rated': np.float64(0.01), 'ok': True}
+{'joint': 'sh_pitch', 'servo': 'STS3215', 'static_nm': np.float64(0.44), 'peak_nm': np.float64(0.79), 'stall_nm': 2.9, 'rated_nm': 1.0, 'peak_over_stall': np.float64(0.27), 'static_over_rated': np.float64(0.44), 'ok': True}
+{'joint': 'sh_roll', 'servo': 'STS3215', 'static_nm': np.float64(0.44), 'peak_nm': np.float64(0.79), 'stall_nm': 2.9, 'rated_nm': 1.0, 'peak_over_stall': np.float64(0.27), 'static_over_rated': np.float64(0.44), 'ok': True}

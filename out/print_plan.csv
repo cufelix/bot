@@ -19,9 +19,10 @@ link_R_sh_roll,PETG-CF,1,13.8,41x113x34,True,1.4,True
 link_R_elbow,PETG-CF,1,22.6,34x169x18,True,2.2,True
 sole_L_foot,TPU 95A,1,7.9,150x70x2,True,1.0,True
 sole_R_foot,TPU 95A,1,7.9,150x70x2,True,1.0,True
-pelvis,PETG-CF,1,35.1,110x152x28,True,3.2,True
-torso_shell,PETG-CF,1,101.2,130x120x106,True,8.7,True
+pelvis,PETG-CF,1,34.7,110x152x28,True,3.2,True
+torso_shell,PETG-CF,1,101.9,130x120x106,True,8.8,True
 torso_cover,PETG,1,18.2,126x118x3,True,1.8,True
+pi_tray,PETG,1,10.0,63x120x3,True,1.1,True
 neck_fork,PETG-CF,1,10.9,44x51x28,True,1.2,True
-head_shell,PETG,1,48.7,72x80x75,True,4.4,True
+head_shell,PETG,1,48.9,72x80x75,True,4.4,True
 head_cover,PETG,1,5.4,63x58x3,True,0.8,True

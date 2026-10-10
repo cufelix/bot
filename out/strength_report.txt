@@ -1,0 +1,15 @@
+Printed-link stress at servo STALL torque (worst case); allowable = yield 45 MPa (PETG-CF, XY)
+joint         servo      tau Nm  strong MPa  weak MPa  bolt N bearing MPa  ok
+L_hip_yaw     STS3215       2.9         5.4      11.5     104         4.3  True
+L_hip_roll    STS3250       4.9         9.2      11.5     175         7.3  True
+L_hip_pitch   STS3250       4.9         9.2      11.5     175         7.3  True
+L_knee        STS3250       4.9         9.2      11.5     175         7.3  True
+L_ankle_pitch STS3250       4.9         9.2      11.5     175         7.3  True
+L_ankle_roll  STS3215       2.9         5.4      11.5     104         4.3  True
+L_sh_pitch    STS3215       2.9         5.4      11.5     104         4.3  True
+L_sh_roll     STS3215       2.9         5.4      11.5     104         4.3  True
+L_elbow       STS3215       2.9         5.4      11.5     104         4.3  True
+neck_yaw      STS3215       2.9         5.4      11.5     104         4.3  True
+neck_pitch    STS3215       2.9         5.4      11.5     104         4.3  True
+
+All joints OK at stall: True | bar strong-axis S = 533 mm3, weak S = 213 mm3

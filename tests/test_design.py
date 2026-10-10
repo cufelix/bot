@@ -67,3 +67,20 @@ def test_simulated_robot_stands_and_walks():
     assert ok
     ok, dist, peak = walk_test.run(steps=6, step=40.0, quiet=True)
     assert ok and dist > 100
+
+def test_body_frame_angles_are_mirror_symmetric():
+    """Same body-frame pitch/yaw angles on both sides, mirrored roll, must give mirror-image link positions (catches sign errors)."""
+    import numpy as np
+    from kinematics import Robot
+    R = Robot(); cfg = json.load(open(os.path.join(ROOT, "firmware", "config", "joints.json")))
+    body = {"hip_pitch": -25, "knee": 50, "ankle_pitch": -25, "hip_roll": 7, "ankle_roll": -7, "hip_yaw": 9, "sh_pitch": -60, "sh_roll": 20, "elbow": -45}
+    ang = {}
+    for side, mirror in (("L_", 1), ("R_", -1)):
+        for n, v in body.items():
+            if n in ("hip_roll", "ankle_roll", "sh_roll", "hip_yaw"): v = v * mirror        # roll/yaw about X/Z flip under y-mirror
+            ang[side + n] = cfg[side + n]["sign"] * v
+    for p in R.parts:
+        if not p["name"].startswith("link_L_"): continue
+        q = next(x for x in R.parts if x["name"] == p["name"].replace("link_L_", "link_R_"))
+        a = R.place(p["frame"], p["com"], ang); b = R.place(q["frame"], q["com"], ang)
+        assert np.allclose(a * [1, -1, 1], b, atol=1.5), (p["name"], a, b)

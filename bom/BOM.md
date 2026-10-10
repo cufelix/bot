@@ -16,7 +16,7 @@ Prices are retail estimates (Oct 2026), USD, shipping/tax/contingency are explic
 | B1 | Raspberry Pi 5 4GB | quad A76 2.4GHz | 1 | 70.00 | 70.00 | runs control loop + vision. 8GB not needed |
 | B2 | Raspberry Pi 5 active cooler | heatsink + fan | 1 | 5.00 | 5.00 |  |
 | B3 | microSD card 64GB A2 | UHS-I | 1 | 10.00 | 10.00 |  |
-| B4 | USB camera module 1080p wide-angle | UVC board ~32x32mm lens FOV 90-120deg | 1 | 30.00 | 30.00 | fits 22x13 mm head window; USB2 |
+| B4 | USB camera module 1080p wide-angle | UVC board 32x32 mm with 28 mm mounting-hole square; lens FOV 90-120deg | 1 | 30.00 | 30.00 | lens fits the 20 mm head window; M2 self-tap posts in head; USB2 |
 | B5 | USB mini microphone | UVC audio class | 1 | 8.00 | 8.00 | optional voice input |
 | B6 | Waveshare Bus Servo Adapter (A) | USB-C to half-duplex TTL for Feetech STS | 2 | 10.00 | 20.00 | bus A legs (12 servos) bus B arms+neck (8 servos) |
 | B7 | BNO085 9-DoF IMU breakout | I2C fused orientation | 1 | 25.00 | 25.00 | on torso floor near CoM |
@@ -33,7 +33,7 @@ Prices are retail estimates (Oct 2026), USD, shipping/tax/contingency are explic
 | C3 | LiPo safe charging bag | fire retardant | 1 | 8.00 | 8.00 |  |
 | C4 | Pololu D24V50F5 buck regulator | 5V 5A | 1 | 22.00 | 22.00 | Pi 5 supply via GPIO 5V pins. Set PSU_MAX_CURRENT=5000 |
 | C5 | INA219 current/voltage sensor | I2C 26V 3.2A shunt | 1 | 8.00 | 8.00 | replace shunt with 10 mOhm for 20A range (see docs) |
-| C6 | Inline blade fuse holder + 15A fuse | 14AWG | 2 | 3.00 | 6.00 | main fuse + spare |
+| C6 | Inline blade fuse holder + 20A ATC fuse | 14AWG | 2 | 3.00 | 6.00 | main fuse + spare. Walking peaks ~10 A (see docs/power.md); a fall can stall several servos |
 | C7 | Latching kill switch 30A (XT60 inline) | panel mount | 1 | 9.00 | 9.00 | hard e-stop at the back |
 | C8 | XT60 connector pair | male+female | 6 | 1.20 | 7.20 |  |
 | C9 | Terminal barrier strip 12pos 25A | 5.08 mm pitch | 2 | 4.00 | 8.00 | star power distribution (V+ and GND) |

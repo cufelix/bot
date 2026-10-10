@@ -17,7 +17,6 @@ def main():
         c = COL.get(p.kind, COL["misc"])
         asm.add(cq.Workplane("XY").add(p.shape), name=n, color=cq.Color(*c))
     asm.save(os.path.join(OUT, "robot.step"))
-    asm.save(os.path.join(OUT, "robot.glb"), "GLTF")
     plan = []
     for n, p in parts.items():
         if p.kind != "printed": continue

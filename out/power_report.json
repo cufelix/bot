@@ -1,6 +1,6 @@
 {
  "walked": true,
- "sum_of_joint_peaks_a": 13.0,
+ "sum_of_joint_peaks_a": 12.8,
  "stall_all_a": 60.4,
  "servo_current_a": 2.82,
  "total_w": 40.3,
@@ -8,7 +8,7 @@
  "usable_wh": 28.3,
  "worst_joint_a": {
   "L_knee": 0.38,
-  "R_knee": 0.37,
+  "R_knee": 0.38,
   "R_hip_roll": 0.29,
   "L_hip_roll": 0.29
  }

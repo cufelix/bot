@@ -1147,13 +1147,13 @@
    "kind": "printed",
    "frame": "base",
    "material": "PETG-CF",
-   "mass": 35.08,
+   "mass": 34.67,
    "com": [
-    3.64,
-    -0.0,
-    383.68
+    3.57,
+    0.0,
+    383.63
    ],
-   "volume": 70730.2,
+   "volume": 69909.1,
    "bbox": [
     110.0,
     152.0,
@@ -1165,13 +1165,13 @@
    "kind": "printed",
    "frame": "base",
    "material": "PETG-CF",
-   "mass": 101.23,
+   "mass": 101.94,
    "com": [
-    11.0,
+    11.05,
     -0.0,
-    465.35
+    464.99
    ],
-   "volume": 204088.2,
+   "volume": 205528.2,
    "bbox": [
     106.0,
     130.0,
@@ -1197,6 +1197,24 @@
    ]
   },
   {
+   "name": "pi_tray",
+   "kind": "printed",
+   "frame": "base",
+   "material": "PETG",
+   "mass": 10.0,
+   "com": [
+    19.07,
+    -0.0,
+    419.7
+   ],
+   "volume": 20158.1,
+   "bbox": [
+    63.0,
+    120.0,
+    3.0
+   ]
+  },
+  {
    "name": "neck_fork",
    "kind": "printed",
    "frame": "neck_yaw",
@@ -1219,13 +1237,13 @@
    "kind": "printed",
    "frame": "neck_pitch",
    "material": "PETG",
-   "mass": 48.73,
+   "mass": 48.87,
    "com": [
-    3.42,
-    -0.98,
-    562.75
+    3.49,
+    -0.97,
+    562.77
    ],
-   "volume": 98253.2,
+   "volume": 98530.8,
    "bbox": [
     72.0,
     80.0,
@@ -1349,7 +1367,7 @@
    "com": [
     17.0,
     0.0,
-    429.7
+    436.7
    ],
    "volume": 95200.0,
    "bbox": [
@@ -1419,13 +1437,13 @@
    "material": "",
    "mass": 25,
    "com": [
-    27.25,
+    26.6,
     0.0,
     571.7
    ],
-   "volume": 10752.0,
+   "volume": 7372.8,
    "bbox": [
-    10.5,
+    7.2,
     32.0,
     32.0
    ]

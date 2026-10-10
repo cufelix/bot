@@ -6,7 +6,7 @@ from .joints import load_joints, angle_to_tick, tick_to_angle, body_limits, clam
 
 TEMP_WARN, TEMP_CUT = 60, 70          # deg C
 VOLT_WARN, VOLT_CUT = 10.2, 9.6       # V (3S: 3.4 V / 3.2 V per cell)
-DEFAULT_PORTS = {"A": "/dev/serial/by-id/usb-legs", "B": "/dev/serial/by-id/usb-upper"}
+DEFAULT_PORTS = {"A": os.environ.get("HUMANOID_PORT_LEGS", "/dev/humanoid_legs"), "B": os.environ.get("HUMANOID_PORT_UPPER", "/dev/humanoid_upper")}
 TORQUE_LIMIT_BOOT = 400               # of 1000 until the soft-start ramp finishes
 
 class SafetyTrip(RuntimeError):

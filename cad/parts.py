@@ -29,6 +29,9 @@ def pelvis(J):
     pts = [(-44, -56), (-44, 56), (44, -56), (44, 56)]
     sol = sol.cut(cq.Workplane("XY").workplane(offset=S.PELVIS_TOP - 3.5).pushPoints(pts).circle(2.1).extrude(4))
     sol = sol.cut(box(-12, 12, -10, 10, S.PELVIS_TOP - 4, S.PELVIS_TOP + 1))
+    for x in (-11.0, 31.0):                 # 20 mm Velcro strap slots for the battery
+        for y in (-30.0, 30.0):
+            sol = sol.cut(box(x - 1.5, x + 1.5, y - 11, y + 11, S.PELVIS_TOP - 4, S.PELVIS_TOP + 1))
     return sol
 
 def torso_shell(J):
@@ -53,6 +56,10 @@ def torso_shell(J):
     for y, z in COVER_PTS():   # cover screw bosses (M3 self-tap, 2.5 pilot)
         shell = shell.union(cq.Workplane("YZ").workplane(offset=-ix - w).center(y, z).circle(4).extrude(9))
         shell = shell.cut(cq.Workplane("YZ").workplane(offset=-ix - w - 1).center(y, z).circle(1.25).extrude(10))
+    zi = z0 + w
+    for x in (-5.0, 40.0):                  # ledges that carry the Pi tray
+        for sg in (-1, 1):
+            shell = shell.union(box(x - 5, x + 5, min(sg * 56.0, sg * 62.0), max(sg * 56.0, sg * 62.0), zi + 19, zi + 25))
     # screw bosses to pelvis
     pts = [(-44, -56), (-44, 56), (44, -56), (44, 56)]
     for x, y in pts:
@@ -61,6 +68,16 @@ def torso_shell(J):
     return shell
 
 COVER_PTS = lambda: [(y, z) for y in (-59.0, 59.0) for z in (S.TORSO_Z0 + 6.0, S.Z_NECK - 6.0)]
+
+def pi_tray():
+    zi = S.TORSO_Z0 + S.WALL
+    t = box(-13, 50, -60, 60, zi + 25.5, zi + 28.5)
+    for dx in (-24.5, 24.5):
+        for dy in (-29.0, 29.0):
+            t = t.cut(cq.Workplane("XY").workplane(offset=zi + 25).center(17 + dx, dy).circle(1.4).extrude(5))   # Pi 5 58x49 hole pattern, M2.5 self-tap
+    t = t.cut(box(32, 44, -14, 14, zi + 25, zi + 29))                                                         # cable passage
+    t = t.cut(box(-9, 3, -20, 20, zi + 25, zi + 29))
+    return t
 
 def torso_cover():
     ix, iy, w = S.TORSO_HX, S.TORSO_HY, S.WALL
@@ -114,6 +131,10 @@ def head_shell(J):
     for yy in (-24, 24):
         shell = shell.cut(cq.Workplane("YZ").workplane(offset=x1 - w - 1).center(yy, zc + 22).circle(4).extrude(w + 2))
     shell = shell.cut(box(x1 - w - 1, x1 + 1, -9, 9, zc - 4, zc + 2))               # mic slot
+    for dy in (-14, 14):                                                             # 28 mm camera-board posts (M2 self-tap)
+        for dz in (-14, 14):
+            shell = shell.union(cq.Workplane("YZ").workplane(offset=30.2).center(dy, zc + 22 + dz).circle(3).extrude(3.0))
+            shell = shell.cut(cq.Workplane("YZ").workplane(offset=29.5).center(dy, zc + 22 + dz).circle(0.85).extrude(5))
     return shell
 
 def head_cover(J):
@@ -157,7 +178,7 @@ def electronics():
         "bus_adapter_arms": dict(size=(28, 41, 12), c=(-28, 30, zi + 6), mass=15),
         "imu_bno085":       dict(size=(26, 18, 4), c=(-20, 0, zi + 2), mass=3),
         "ads1115_fsr":      dict(size=(18, 27, 5), c=(38, 0, zi + 3), mass=3),
-        "pi5":              dict(size=(56, 85, 20), c=(17, 0, zi + 27 + 10), mass=60),
+        "pi5":              dict(size=(56, 85, 20), c=(17, 0, zi + 34 + 10), mass=60),
         "power_dist":       dict(size=(35, 40, 15), c=(-31, 0, zi + 21), mass=30),
         "buck_5V_5A":       dict(size=(34, 34, 11), c=(-31, 40, zi + 20), mass=20),
         "kill_switch":      dict(size=(20, 14, 20), c=(-S.TORSO_HX - 6, 0, S.Z_NECK - 40), mass=10),

@@ -37,6 +37,7 @@ def build():
     add(Part("pelvis", Pt.pelvis(J).val(), "printed", "base", "PETG-CF"))
     add(Part("torso_shell", Pt.torso_shell(J).val(), "printed", "base", "PETG-CF"))
     add(Part("torso_cover", Pt.torso_cover().val(), "printed", "base", "PETG"))
+    add(Part("pi_tray", Pt.pi_tray().val(), "printed", "base", "PETG"))
     add(Part("neck_fork", Pt.neck_fork(J).val(), "printed", "neck_yaw", "PETG-CF"))
     add(Part("head_shell", Pt.head_shell(J).val(), "printed", "neck_pitch", "PETG"))
     add(Part("head_cover", Pt.head_cover(J).val(), "printed", "neck_pitch", "PETG"))
@@ -44,7 +45,7 @@ def build():
         sx, sy, sz = e["size"]; cx, cy, cz = e["c"]
         add(Part(n, Pt.box(cx - sx / 2, cx + sx / 2, cy - sy / 2, cy + sy / 2, cz - sz / 2, cz + sz / 2).val(), "elec", "base", "", e["mass"]))
     zc = J["neck_pitch"].pos[2]
-    add(Part("camera_usb", Pt.box(22, 32.5, -16, 16, zc + 6, zc + 38).val(), "elec", "neck_pitch", "", 25))
+    add(Part("camera_usb", Pt.box(23, 30.2, -16, 16, zc + 6, zc + 38).val(), "elec", "neck_pitch", "", 25))
     return parts, J
 
 def chain(frame, J):

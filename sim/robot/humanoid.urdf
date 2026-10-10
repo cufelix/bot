@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot name="humanoid">
 <mujoco><compiler meshdir="meshes" balanceinertia="true" discardvisual="false" fusestatic="false"/></mujoco>
-<link name="base_link"><inertial><origin xyz="0.00315 0.00074 0.43161"/><mass value="1.0755"/><inertia ixx="2.853e-03" iyy="2.086e-03" izz="1.857e-03" ixy="2.732e-05" ixz="0.000e+00" iyz="1.513e-05"/></inertial>
+<link name="base_link"><inertial><origin xyz="0.00331 0.00074 0.43189"/><mass value="1.0858"/><inertia ixx="2.867e-03" iyy="2.093e-03" izz="1.875e-03" ixy="2.744e-05" ixz="0.000e+00" iyz="1.535e-05"/></inertial>
 <visual><origin xyz="-0.00000 -0.00000 -0.00000"/><geometry><mesh filename="servo_L_hip_yaw.stl" scale="0.001 0.001 0.001"/></geometry></visual>
 <visual><origin xyz="-0.00000 -0.00000 -0.00000"/><geometry><mesh filename="servo_L_sh_pitch.stl" scale="0.001 0.001 0.001"/></geometry></visual>
 <visual><origin xyz="-0.00000 -0.00000 -0.00000"/><geometry><mesh filename="servo_R_hip_yaw.stl" scale="0.001 0.001 0.001"/></geometry></visual>
@@ -10,6 +10,7 @@
 <visual><origin xyz="-0.00000 -0.00000 -0.00000"/><geometry><mesh filename="pelvis.stl" scale="0.001 0.001 0.001"/></geometry></visual>
 <visual><origin xyz="-0.00000 -0.00000 -0.00000"/><geometry><mesh filename="torso_shell.stl" scale="0.001 0.001 0.001"/></geometry></visual>
 <visual><origin xyz="-0.00000 -0.00000 -0.00000"/><geometry><mesh filename="torso_cover.stl" scale="0.001 0.001 0.001"/></geometry></visual>
+<visual><origin xyz="-0.00000 -0.00000 -0.00000"/><geometry><mesh filename="pi_tray.stl" scale="0.001 0.001 0.001"/></geometry></visual>
 <visual><origin xyz="-0.00000 -0.00000 -0.00000"/><geometry><mesh filename="battery_3S.stl" scale="0.001 0.001 0.001"/></geometry></visual>
 <visual><origin xyz="-0.00000 -0.00000 -0.00000"/><geometry><mesh filename="bus_adapter_legs.stl" scale="0.001 0.001 0.001"/></geometry></visual>
 <visual><origin xyz="-0.00000 -0.00000 -0.00000"/><geometry><mesh filename="bus_adapter_arms.stl" scale="0.001 0.001 0.001"/></geometry></visual>
@@ -95,7 +96,7 @@
 <link name="neck_yaw_link"><inertial><origin xyz="0.00000 0.00427 0.02383"/><mass value="0.0109"/><inertia ixx="4.117e-06" iyy="3.072e-06" izz="2.468e-06" ixy="0.000e+00" ixz="0.000e+00" iyz="0.000e+00"/></inertial>
 <visual><origin xyz="-0.00000 -0.00000 -0.50970"/><geometry><mesh filename="neck_fork.stl" scale="0.001 0.001 0.001"/></geometry></visual>
 </link>
-<link name="neck_pitch_link"><inertial><origin xyz="0.00492 -0.01236 0.01379"/><mass value="0.1342"/><inertia ixx="7.159e-05" iyy="8.738e-05" izz="8.273e-05" ixy="0.000e+00" ixz="0.000e+00" iyz="0.000e+00"/></inertial>
+<link name="neck_pitch_link"><inertial><origin xyz="0.00482 -0.01236 0.01379"/><mass value="0.1343"/><inertia ixx="7.173e-05" iyy="8.666e-05" izz="8.201e-05" ixy="0.000e+00" ixz="0.000e+00" iyz="0.000e+00"/></inertial>
 <visual><origin xyz="-0.00000 -0.01200 -0.54970"/><geometry><mesh filename="servo_neck_pitch.stl" scale="0.001 0.001 0.001"/></geometry></visual>
 <visual><origin xyz="-0.00000 -0.01200 -0.54970"/><geometry><mesh filename="head_shell.stl" scale="0.001 0.001 0.001"/></geometry></visual>
 <visual><origin xyz="-0.00000 -0.01200 -0.54970"/><geometry><mesh filename="head_cover.stl" scale="0.001 0.001 0.001"/></geometry></visual>

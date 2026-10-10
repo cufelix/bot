@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Humanoid Viewer</title>
+<style>
+  :root { --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2230; --muted:#667085; --line:#d7dbe3; --acc:#2563eb; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#12151c; --panel:#1b2030; --ink:#e7eaf2; --muted:#98a2b3; --line:#2b3246; --acc:#6ea0ff; } }
+  html,body { margin:0; height:100%; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui,sans-serif; }
+  #app { display:grid; grid-template-columns: 1fr 300px; height:100vh; }
+  #view { position:relative; min-width:0; overflow:hidden; } canvas { position:absolute; inset:0; width:100%; height:100%; }
+  aside { background:var(--panel); border-left:1px solid var(--line); overflow:auto; padding:12px 14px; }
+  h1 { font-size:15px; margin:0 0 2px; } .sub { color:var(--muted); font-size:12px; margin-bottom:10px; }
+  h2 { font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin:14px 0 6px; }
+  .row { display:grid; grid-template-columns: 92px 1fr 44px; gap:6px; align-items:center; margin:2px 0; font-size:12px; }
+  .row output { text-align:right; color:var(--muted); font-variant-numeric:tabular-nums; }
+  input[type=range] { width:100%; accent-color:var(--acc); }
+  button { background:transparent; color:var(--ink); border:1px solid var(--line); border-radius:6px; padding:5px 9px; margin:0 4px 4px 0; cursor:pointer; font:inherit; }
+  button:hover { border-color:var(--acc); } label { margin-right:10px; font-size:12px; white-space:nowrap; }
+  #msg { position:absolute; left:12px; top:10px; color:var(--muted); font-size:12px; }
+  @media (max-width:760px) { #app { grid-template-columns:1fr; grid-template-rows:55vh 1fr; height:100vh; } aside { border-left:0; border-top:1px solid var(--line); } }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="view"><div id="msg">loading…</div></div>
+  <aside>
+    <h1>20-DOF humanoid</h1><div class="sub">drag = orbit · wheel = zoom · right-drag = pan</div>
+    <h2>Pose</h2>
+    <div><button data-pose="neutral">Neutral</button><button data-pose="crouch">Walk crouch</button><button data-pose="wave">Wave</button><button data-pose="reach">Reach</button></div>
+    <h2>Show</h2>
+    <div><label><input type="checkbox" id="t-printed" checked> printed</label><label><input type="checkbox" id="t-servo" checked> servos</label><label><input type="checkbox" id="t-elec" checked> electronics</label></div>
+    <div id="sliders"></div>
+  </aside>
+</div>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const host = document.getElementById('view'), msg = document.getElementById('msg');
+const renderer = new THREE.WebGLRenderer({ antialias: true }); renderer.setPixelRatio(devicePixelRatio); host.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+renderer.setClearColor(getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() || '#f4f5f7');
+const cam = new THREE.PerspectiveCamera(35, 1, 10, 5000); cam.position.set(900, 520, 1050);
+const ctl = new OrbitControls(cam, renderer.domElement); ctl.target.set(0, 300, 0); ctl.update();
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8890a0, 1.1));
+const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(300, 800, 500); scene.add(sun);
+const grid = new THREE.GridHelper(1000, 20, 0x8a93a6, 0xc4c9d4); grid.material.opacity = .45; grid.material.transparent = true; scene.add(grid);
+const root = new THREE.Group(); root.rotation.x = -Math.PI / 2; scene.add(root);   // CAD is Z-up
+
+function resize() { const w = host.clientWidth, h = host.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+addEventListener('resize', resize); resize();
+
+let model, cfg, glb;
+try {
+  [model, cfg, glb] = await Promise.all([
+    fetch('../../out/model.json').then(r => r.json()),
+    fetch('../../firmware/config/joints.json').then(r => r.json()),
+    new Promise((res, rej) => new GLTFLoader().load('../../out/robot.glb', res, undefined, rej)),
+  ]);
+} catch (e) { msg.textContent = 'Could not load model files (' + e + '). Serve the repo root over http, e.g. `python3 -m http.server`, then open /docs/viewer/.'; throw e; }
+msg.textContent = '';
+const J = model.joints, byNode = {};
+const kind = Object.fromEntries(model.parts.map(p => [p.name, p.kind]));
+const COLORS = { servo: 0x2a2c34, printed: 0xe4e1d4, elec: 0x2a9a50, misc: 0x808080 };
+glb.scene.traverse(o => {
+  byNode[o.name] = o;
+  if (o.isMesh) o.material = new THREE.MeshStandardMaterial({ color: COLORS[kind[o.name]] ?? 0x808080, roughness: .6, metalness: .05, flatShading: true, side: THREE.DoubleSide });
+});
+root.add(glb.scene);
+const frame = Object.fromEntries(model.parts.map(p => [p.name, p.frame]));
+
+const angles = {};                       // out-axis angle in degrees (as in the CAD)
+function frameMatrix(f, memo) {
+  if (f === 'base') return new THREE.Matrix4();
+  if (memo[f]) return memo[f];
+  const j = J[f], p = new THREE.Vector3(...j.pos), a = new THREE.Vector3(...j.out).normalize();
+  const m = new THREE.Matrix4().makeTranslation(p.x, p.y, p.z)
+    .multiply(new THREE.Matrix4().makeRotationAxis(a, THREE.MathUtils.degToRad(angles[f] || 0)))
+    .multiply(new THREE.Matrix4().makeTranslation(-p.x, -p.y, -p.z));
+  return memo[f] = frameMatrix(j.parent, memo).clone().multiply(m);
+}
+function update() {
+  const memo = {};
+  for (const [name, node] of Object.entries(byNode)) {
+    if (!(name in frame)) continue;
+    node.matrixAutoUpdate = false; node.matrix.copy(frameMatrix(frame[name], memo)); node.matrixWorldNeedsUpdate = true;
+  }
+}
+// sliders are in body-frame degrees (sign from firmware config), like the control software
+const wrap = document.getElementById('sliders'); const sl = {};
+const groups = [['Left leg', /^L_(hip|knee|ankle)/], ['Right leg', /^R_(hip|knee|ankle)/], ['Left arm', /^L_(sh|elbow)/], ['Right arm', /^R_(sh|elbow)/], ['Neck', /^neck/]];
+for (const [title, re] of groups) {
+  const h = document.createElement('h2'); h.textContent = title; wrap.appendChild(h);
+  for (const n of Object.keys(J).filter(n => re.test(n))) {
+    const s = cfg[n].sign, lo = Math.min(s * J[n].lo, s * J[n].hi), hi = Math.max(s * J[n].lo, s * J[n].hi);
+    const row = document.createElement('div'); row.className = 'row';
+    row.innerHTML = `<span>${n.replace(/^[LR]_/, '')}</span><input type="range" min="${lo}" max="${hi}" step="1" value="0"><output>0°</output>`;
+    const inp = row.querySelector('input'), out = row.querySelector('output');
+    inp.addEventListener('input', () => setBody(n, +inp.value));
+    sl[n] = { inp, out, s }; wrap.appendChild(row);
+  }
+}
+function setBody(n, deg) { angles[n] = sl[n].s * deg; sl[n].inp.value = deg; sl[n].out.textContent = Math.round(deg) + '°'; update(); }
+function pose(p) { for (const n in sl) setBody(n, 0); for (const [n, v] of Object.entries(p)) setBody(n, v); }
+const poses = {
+  neutral: {},
+  crouch: { L_hip_pitch: -20, R_hip_pitch: -20, L_knee: 40, R_knee: 40, L_ankle_pitch: -20, R_ankle_pitch: -20, L_sh_pitch: -30, R_sh_pitch: -30, L_elbow: -50, R_elbow: -50 },
+  wave: { R_sh_pitch: -150, R_sh_roll: -20, R_elbow: -70, neck_yaw: 25 },
+  reach: { L_sh_pitch: -90, R_sh_pitch: -90, L_elbow: -10, R_elbow: -10, L_hip_pitch: -10, R_hip_pitch: -10, L_knee: 20, R_knee: 20, L_ankle_pitch: -10, R_ankle_pitch: -10 },
+};
+document.querySelectorAll('button[data-pose]').forEach(b => b.onclick = () => pose(poses[b.dataset.pose]));
+for (const k of ['printed', 'servo', 'elec']) document.getElementById('t-' + k).onchange = e => { for (const [n, node] of Object.entries(byNode)) if (kind[n] === k) node.visible = e.target.checked; };
+update();
+window.viewer = { THREE, scene, root, cam, ctl };
+renderer.setAnimationLoop(() => { ctl.update(); renderer.render(scene, cam); });
+</script>
+</body>
+</html>

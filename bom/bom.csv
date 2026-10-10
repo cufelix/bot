@@ -4,7 +4,7 @@ A2,Actuation,Feetech STS3215 servo (ST-3215-C018),12V 30kg.cm stall (2.9 N.m) 1/
 B1,Compute,Raspberry Pi 5 4GB,quad A76 2.4GHz,1,70.00,Pi reseller,runs control loop + vision. 8GB not needed
 B2,Compute,Raspberry Pi 5 active cooler,heatsink + fan,1,5.00,Pi reseller,
 B3,Compute,microSD card 64GB A2,UHS-I,1,10.00,any,
-B4,Compute,USB camera module 1080p wide-angle,UVC board ~32x32mm lens FOV 90-120deg,1,30.00,Arducam/ELP,fits 22x13 mm head window; USB2
+B4,Compute,USB camera module 1080p wide-angle,UVC board 32x32 mm with 28 mm mounting-hole square; lens FOV 90-120deg,1,30.00,Arducam/ELP,lens fits the 20 mm head window; M2 self-tap posts in head; USB2
 B5,Compute,USB mini microphone,UVC audio class,1,8.00,any,optional voice input
 B6,Compute,Waveshare Bus Servo Adapter (A),USB-C to half-duplex TTL for Feetech STS,2,10.00,Waveshare,bus A legs (12 servos) bus B arms+neck (8 servos)
 B7,Compute,BNO085 9-DoF IMU breakout,I2C fused orientation,1,25.00,Adafruit/SparkFun,on torso floor near CoM
