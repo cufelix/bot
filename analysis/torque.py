@@ -52,9 +52,11 @@ def single_support(R, q, side="L_", cop_dx=0.0, cop_dy=0.0):
     corners = R.foot_corners(side, a)
     xmin, xmax = corners[:, 0].min(), corners[:, 0].max()
     margin = min(com[0] - xmin, xmax - com[0])
+    ymin, ymax = corners[:, 1].min(), corners[:, 1].max()
+    y_margin = min(com[1] - ymin, ymax - com[1])
     cop = (com[0] + cop_dx, com[1] + cop_dy); F = M * G
     taus = {j: abs(R.torque_with_ground(side + j, a, cop, F)) for j in ("hip_yaw", "hip_roll", "hip_pitch", "knee", "ankle_pitch", "ankle_roll")}
-    return dict(q=q, cop_shift=[cop_dx, cop_dy], roll_lean=round(r, 1), com=[round(c, 1) for c in com], x_margin_mm=round(margin, 1), tau=taus)
+    return dict(q=q, cop_shift=[cop_dx, cop_dy], roll_lean=round(r, 1), com=[round(c, 1) for c in com], x_margin_mm=round(margin, 1), y_margin_mm=round(y_margin, 1), roll_lean_saturated=abs(r) >= 25 - 1e-6, tau=taus)
 
 def double_support(R, q):
     a = {}
@@ -109,7 +111,7 @@ def main(write=True):
     # envelope per joint (max over cases), only feasible-balance cases for stance
     env = {}
     for name, c in report["cases"].items():
-        if "x_margin_mm" in c and c["x_margin_mm"] < 5: c["feasible"] = False; continue
+        if "x_margin_mm" in c and (c["x_margin_mm"] < 5 or c.get("y_margin_mm", 99) < 5 or c.get("roll_lean_saturated")): c["feasible"] = False; continue
         c["feasible"] = True
         for j, t in c["tau"].items():
             env[j] = max(env.get(j, 0), t)

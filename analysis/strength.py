@@ -5,7 +5,7 @@ STALL = {"STS3215": 2.9, "STS3250": 4.9}
 W, T = 20.0, 8.0                 # bar width (in the plane of the joint torque) x thickness, mm
 S_STRONG = T * W**2 / 6          # section modulus for bending from the joint's own torque
 S_WEAK = W * T**2 / 6            # for the orthogonal moment from other joints
-SIGMA_ALLOW = 22.0               # MPa : PETG-CF Sy ~ 45 MPa (XY) with SF 2 (layer-adhesion direction is weaker: keep bars on flat)
+SIGMA_ALLOW = 22.0               # MPa : half of PETG-CF yield (~45 MPa XY). Stall torque is already a worst-case overload, so the pass bar is yield at stall (SF 1 on stall, SF ~2 vs the 65%-of-stall design load)
 BOLT_R, N_BOLT, D_BOLT, T_WALL = 7.0, 4, 3.0, 8.0
 M3_SHEAR = 2500.0                # N, A2 M3 (conservative)
 

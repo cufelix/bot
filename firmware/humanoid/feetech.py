@@ -49,6 +49,16 @@ def parse_status(buf):
         i = buf.find(b"\xff\xff", i + 1)
     return None
 
+def parse_all(buf):
+    """All valid status packets in buf -> {id: (err, data)}; tolerates silent servos and junk."""
+    out, i = {}, buf.find(b"\xff\xff")
+    while i >= 0 and i + 4 <= len(buf):
+        end = i + 4 + buf[i + 3]
+        if end <= len(buf) and checksum(buf[i + 2:end - 1]) == buf[end - 1]:
+            out[buf[i + 2]] = (buf[i + 4], bytes(buf[i + 5:end - 1])); i = buf.find(b"\xff\xff", end)
+        else: i = buf.find(b"\xff\xff", i + 1)
+    return out
+
 class ServoError(RuntimeError):
     pass
 
@@ -64,8 +74,10 @@ class Bus:
         buf = self.s.read(expect)
         return buf
     def transact(self, sid, inst, params=b"", reply_len=0):
-        raw = self._xfer(packet(sid, inst, params), 0 if sid == BROADCAST else 6 + reply_len)
-        return raw
+        if inst == SYNC_READ: expect = reply_len            # caller passes the full multi-frame length
+        elif sid == BROADCAST: expect = 0
+        else: expect = 6 + reply_len
+        return self._xfer(packet(sid, inst, params), expect)
 
 class FakeBus:
     """In-memory servo bank implementing PING/READ/WRITE/SYNC_WRITE/SYNC_READ against 256-byte memories. Used by tests and --dry-run."""
@@ -115,7 +127,9 @@ class Servos:
         return int.from_bytes(r[2], "little")
     def write(self, sid, name, value):
         addr, size = REG[name]
-        self.bus.transact(sid, WRITE, bytes([addr]) + pack(size, value), 0)
+        r = parse_status(self.bus.transact(sid, WRITE, bytes([addr]) + pack(size, value), 0))
+        if r is None: raise ServoError(f"no reply from servo {sid} writing {name}")
+        if r[1]: raise ServoError(f"servo {sid} error flags 0x{r[1]:02x} writing {name}")
     def sync_write(self, name, values):
         """values: {id: int}"""
         addr, size = REG[name]
@@ -124,13 +138,7 @@ class Servos:
     def sync_read(self, name, ids):
         addr, size = REG[name]
         raw = self.bus.transact(BROADCAST, SYNC_READ, bytes([addr, size]) + bytes(ids), (size + 6) * len(ids))
-        out, pos = {}, 0
-        frame = size + 6
-        while pos + frame <= len(raw):
-            r = parse_status(raw[pos:pos + frame])
-            if r: out[r[0]] = int.from_bytes(r[2], "little")
-            pos += frame
-        return out
+        return {i: int.from_bytes(d, "little") for i, (e, d) in parse_all(raw).items() if not e}
     # --- convenience
     def torque(self, ids, on):
         self.sync_write("torque_enable", {i: int(on) for i in ids})

@@ -50,7 +50,9 @@ def test_joint_config_matches_cad():
     cfg = json.load(open(os.path.join(ROOT, "firmware", "config", "joints.json")))
     m = load_model()["joints"]
     assert set(cfg) == set(m)
-    for n, c in cfg.items(): assert (c["lo"], c["hi"]) == (m[n]["lo"], m[n]["hi"]) and c["servo"] == m[n]["servo"]
+    for n, c in cfg.items():
+        assert (c["lo"], c["hi"]) == (m[n]["lo"], m[n]["hi"]) and c["servo"] == m[n]["servo"]
+        assert c["id"] > 0 and c["bus"] in ("A", "B"), n
 
 @pytest.mark.slow
 def test_cad_neutral_pose_has_no_clashes():

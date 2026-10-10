@@ -1,7 +1,7 @@
 """Hardware abstraction: 20 joints on two Feetech buses, with limits, ramps and safety."""
 import json, os, time
 import numpy as np
-from .feetech import Servos, Bus, FakeBus, CENTER, TICKS, decode_sign_magnitude
+from .feetech import Servos, Bus, FakeBus, ServoError, CENTER, TICKS, decode_sign_magnitude
 from .joints import load_joints, angle_to_tick, tick_to_angle, body_limits, clamp
 
 TEMP_WARN, TEMP_CUT = 60, 70          # deg C
@@ -41,6 +41,10 @@ class Robot:
         t = self.read_ticks()
         return {n: tick_to_angle(self.joints[n], v) for n, v in t.items()}
 
+    def _require_all(self, got, what):
+        missing = [n for n in self.names if n not in got]
+        if missing: raise SafetyTrip(f"no {what} from: {', '.join(missing)}")
+
     def read_health(self):
         h = {}
         for b, s in self.buses.items():
@@ -51,16 +55,25 @@ class Robot:
 
     def check_health(self):
         h = self.read_health()
+        try: self._require_all(h, "health reply")
+        except SafetyTrip: self.emergency_stop(); raise
         for n, v in h.items():
             if v["temp"] >= TEMP_CUT or v["volt"] <= VOLT_CUT:
-                self.torque_off(); raise SafetyTrip(f"{n}: temp {v['temp']} C volt {v['volt']} V")
+                self.emergency_stop(); raise SafetyTrip(f"{n}: temp {v['temp']} C volt {v['volt']} V")
         return h
 
     # ---- commands
     def torque_on(self):
+        if self.estop: raise SafetyTrip("e-stop latched; torque_on refused")
         for b, s in self.buses.items(): s.torque(self.ids[b], True)
-    def torque_off(self):
-        for b, s in self.buses.items(): s.torque(self.ids[b], False)
+    def torque_off(self, repeats=3):
+        """Best effort on every bus: one failing bus must not leave the other powered."""
+        errs = []
+        for _ in range(repeats):
+            for b, s in self.buses.items():
+                try: s.torque(self.ids[b], False)
+                except Exception as e: errs.append(f"bus {b}: {e!r}")
+        if len(errs) == repeats * len(self.buses): raise ServoError("torque_off failed on all buses: " + "; ".join(errs))
 
     def configure(self):
         """Write protective EEPROM settings: position limits (from CAD), torque limit, temp/volt cut-offs, gentle P gain."""
@@ -73,12 +86,14 @@ class Robot:
             s.write(i, "max_temp", TEMP_CUT); s.write(i, "max_volt", 140); s.write(i, "min_volt", int(VOLT_CUT * 10))
             s.write(i, "mode", 0)
             s.write(i, "p_gain", 16); s.write(i, "d_gain", 32); s.write(i, "i_gain", 0)
-            s.write(i, "acceleration", 100)
+            s.write(i, "acceleration", 100); s.write(i, "goal_speed", 1500)   # 0 would mean max speed
             s.write(i, "lock", 1)
 
     def soft_start(self, seconds=2.0):
         """Hold the pose the robot is in, ramp torque up. Never snaps to a stored target."""
+        if self.estop: raise SafetyTrip("e-stop latched")
         cur = self.read_angles()
+        self._require_all(cur, "position reply")      # never command the zero pose for a silent servo
         self.target.update(cur)
         self.send(self.target)
         for b, s in self.buses.items():

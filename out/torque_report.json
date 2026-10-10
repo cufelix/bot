@@ -14,6 +14,8 @@
     346.4
    ],
    "x_margin_mm": 41.9,
+   "y_margin_mm": 35.0,
+   "roll_lean_saturated": false,
    "tau": {
     "hip_yaw": 0.0,
     "hip_roll": 1.2237900806970001,
@@ -37,6 +39,8 @@
     348.5
    ],
    "x_margin_mm": 43.3,
+   "y_margin_mm": 35.0,
+   "roll_lean_saturated": false,
    "tau": {
     "hip_yaw": 0.0,
     "hip_roll": 1.2237900806970001,
@@ -60,6 +64,8 @@
     351.8
    ],
    "x_margin_mm": 44.5,
+   "y_margin_mm": 35.0,
+   "roll_lean_saturated": false,
    "tau": {
     "hip_yaw": 0.0,
     "hip_roll": 1.223790080697,
@@ -83,6 +89,8 @@
     348.5
    ],
    "x_margin_mm": 43.3,
+   "y_margin_mm": 35.0,
+   "roll_lean_saturated": false,
    "tau": {
     "hip_yaw": 0.0,
     "hip_roll": 1.2237900806970001,
@@ -106,6 +114,8 @@
     348.5
    ],
    "x_margin_mm": 43.3,
+   "y_margin_mm": 35.0,
+   "roll_lean_saturated": false,
    "tau": {
     "hip_yaw": 0.0,
     "hip_roll": 1.2237900806970001,
@@ -129,6 +139,8 @@
     348.5
    ],
    "x_margin_mm": 43.3,
+   "y_margin_mm": 35.0,
+   "roll_lean_saturated": false,
    "tau": {
     "hip_yaw": 0.0,
     "hip_roll": 0.7353227126970001,
@@ -152,6 +164,8 @@
     348.5
    ],
    "x_margin_mm": 43.3,
+   "y_margin_mm": 35.0,
+   "roll_lean_saturated": false,
    "tau": {
     "hip_yaw": 0.0,
     "hip_roll": 1.7122574486970001,
@@ -175,6 +189,8 @@
     351.8
    ],
    "x_margin_mm": 44.5,
+   "y_margin_mm": 35.0,
+   "roll_lean_saturated": false,
    "tau": {
     "hip_yaw": 0.0,
     "hip_roll": 1.223790080697,
@@ -198,6 +214,8 @@
     351.8
    ],
    "x_margin_mm": 44.5,
+   "y_margin_mm": 35.0,
+   "roll_lean_saturated": false,
    "tau": {
     "hip_yaw": 0.0,
     "hip_roll": 1.223790080697,
@@ -221,6 +239,8 @@
     351.8
    ],
    "x_margin_mm": 44.5,
+   "y_margin_mm": 35.0,
+   "roll_lean_saturated": false,
    "tau": {
     "hip_yaw": 0.0,
     "hip_roll": 0.7353227126970001,
@@ -244,6 +264,8 @@
     351.8
    ],
    "x_margin_mm": 44.5,
+   "y_margin_mm": 35.0,
+   "roll_lean_saturated": false,
    "tau": {
     "hip_yaw": 0.0,
     "hip_roll": 1.7122574486970001,

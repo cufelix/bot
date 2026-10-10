@@ -40,27 +40,29 @@ def main():
     ap.add_argument("--dry-run", action="store_true"); ap.add_argument("--steps", type=int, default=4); ap.add_argument("--step-mm", type=float, default=40.0)
     ap.add_argument("--imu", action="store_true", help="use BNO085 tilt feedback while walking")
     a = ap.parse_args()
-    r = Robot(dry_run=a.dry_run)
+    r = Robot(dry_run=a.dry_run); ping_only = False
+    zero = lambda: {n: 0.0 for n in r.names}
     try:
-        if a.cmd == "ping": return ping(r)
+        if a.cmd == "ping": ping_only = True; return ping(r)
         if a.cmd == "relax": r.torque_off(); return 0
         r.configure(); r.soft_start(seconds=0.0 if a.dry_run else 2.0)
         if a.cmd == "monitor": monitor(r)
-        elif a.cmd == "stand": r.move_to({}, 2.0)
+        elif a.cmd == "stand": r.move_to(zero(), 2.0)
         elif a.cmd == "crouch": r.move_to({**poses.crouch(18), **poses.ARMS_READY}, 2.5)
         elif a.cmd == "wave":
-            r.move_to({}, 1.5); t0 = time.time()
-            while time.time() - t0 < 6: r.send(poses.wave(time.time() - t0)); time.sleep(0.02)
+            r.move_to({**zero(), **poses.wave(0)}, 2.0); t0 = time.time()
+            while time.time() - t0 < 6: r.send(poses.wave(time.time() - t0), max_step_deg=3.0); time.sleep(0.02)
         elif a.cmd == "walk":
             imu = None
             if a.imu:
                 from humanoid.sensors import IMU; imu = IMU()
             walk(r, a.steps, a.step_mm, imu)
-        r.move_to({}, 2.0)
+        r.move_to(zero(), 2.5)          # controlled stand-up before torque is released
     except (KeyboardInterrupt, SafetyTrip) as e:
         print("STOP:", repr(e)); r.emergency_stop()
     finally:
-        r.torque_off(); r.close()
+        if not ping_only: r.torque_off()
+        r.close()
 
 if __name__ == "__main__":
     sys.exit(main() or 0)

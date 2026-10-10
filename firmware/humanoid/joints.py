@@ -19,7 +19,8 @@ def load_joints(path=None, calib=None):
 def angle_to_tick(joint, deg):
     """body-frame angle (deg, about canonical +X/+Y/+Z) -> servo tick"""
     out_deg = joint["sign"] * deg
-    return int(round(CENTER + joint["offset"] + joint["dir"] * out_deg * TICKS / 360.0))
+    t = int(round(CENTER + joint["offset"] + joint["dir"] * out_deg * TICKS / 360.0))
+    return max(0, min(TICKS - 1, t))
 
 def tick_to_angle(joint, tick):
     out_deg = (tick - CENTER - joint["offset"]) * 360.0 / TICKS * joint["dir"]
