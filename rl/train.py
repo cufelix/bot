@@ -6,6 +6,9 @@ from stable_baselines3.common.vec_env import SubprocVecEnv
 from stable_baselines3.common.callbacks import CheckpointCallback, BaseCallback
 from stable_baselines3.common.monitor import Monitor
 from .env import WalkEnv
+from duck.env import DuckEnv
+ENVS = dict(humanoid=WalkEnv, duck=DuckEnv)
+KIND = "humanoid"
 
 class Log(BaseCallback):
     def __init__(self): super().__init__(); self.t0 = time.time()
@@ -16,12 +19,13 @@ class Log(BaseCallback):
     def _on_step(self): return True
 
 def make(i): 
-    def f(): return Monitor(WalkEnv(seed=i))
+    def f(): return Monitor(ENVS[KIND](seed=i))
     return f
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--steps", type=float, default=40e6); ap.add_argument("--out", default="out/rl/run1")
-    ap.add_argument("--envs", type=int, default=8); ap.add_argument("--resume", default=None); a = ap.parse_args()
+    ap.add_argument("--envs", type=int, default=8); ap.add_argument("--resume", default=None); ap.add_argument("--robot", default="humanoid", choices=list(ENVS)); a = ap.parse_args()
+    global KIND; KIND = a.robot
     os.makedirs(a.out, exist_ok=True); torch.set_num_threads(3)
     env = SubprocVecEnv([make(i) for i in range(a.envs)])
     kw = dict(policy_kwargs=dict(log_std_init=-1.5, net_arch=dict(pi=[256, 128, 64], vf=[256, 128, 64]), activation_fn=torch.nn.ELU), n_steps=128, batch_size=4096,
