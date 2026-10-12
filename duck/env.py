@@ -80,7 +80,7 @@ class DuckEnv(gym.Env):
         R = self.d.xmat[1].reshape(3, 3); v = R.T @ self.d.qvel[0:3]; wz = self.d.qvel[5]
         e_v = np.sum((self.cmd[:2] - v[:2]) ** 2); e_w = (self.cmd[2] - wz) ** 2
         cn = np.linalg.norm(self.cmd[:2]); prog = float(v[:2] @ self.cmd[:2] / cn) if cn > 1e-3 else 0.0
-        r_vel = 1.0 * np.exp(-e_v / 0.01) + 0.6 * np.exp(-e_v / 0.05) + 0.8 * np.exp(-e_w / 0.15) + (6.0 * np.clip(prog, -0.05, cn) if cn > 0.03 else 0.0)
+        r_vel = 1.5 * np.exp(-e_v / 0.004) + 0.6 * np.exp(-e_v / 0.03) + 1.0 * np.exp(-e_w / 0.08) + (6.0 * np.clip(prog, -0.05, cn) if cn > 0.03 else 0.0)
         mov = self._moving(); rc = self.ref.contacts(self.cmd, self._phase()) > 0.5 if mov else np.array([True, True])
         r_gait = 1.0 * sum(1.0 if c[k] == rc[k] else -0.3 for k in range(2)) / 2 if mov else 0.3 * sum(c) / 2
         clear = sum(np.clip(self.d.site_xpos[self.foot_site[k], 2] - 0.03, -0.015, 0.015) for k in range(2) if mov and not rc[k])
@@ -89,7 +89,7 @@ class DuckEnv(gym.Env):
         g = self._grav(); p_orient = np.sum(g[:2] ** 2); p_ang = np.sum(self.d.qvel[3:5] ** 2); p_z = v[2] ** 2
         tau = np.abs(self.d.actuator_force[self.leg]); p_tau = np.sum((tau / 3.0) ** 2)
         p_act = np.sum((a - self.last_a) ** 2); p_acc = np.sum(((qd - self.last_qd) / (DT * DECIM)) ** 2) * 1e-5
-        pen = 5.0 * p_orient + 0.05 * p_ang + 1.0 * p_z + 0.02 * p_tau + 0.08 * p_act + min(p_acc, 0.3)
+        pen = 5.0 * p_orient + 0.05 * p_ang + 1.0 * p_z + 0.02 * p_tau + 0.15 * p_act + min(p_acc, 0.3)
         return r_vel + r_gait + 5.0 * clear + r_ref + 1.0 - min(pen + 0.02 * np.sum(a ** 2), 1.5), dict(vel=r_vel)
 
 if __name__ == "__main__":      # open-loop reference replay: does the prior walk by itself?
